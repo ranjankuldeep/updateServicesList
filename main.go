@@ -7,6 +7,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/joho/godotenv"
 	"github.com/ranjankuldeep/updateServicesList/internal/database"
 	"github.com/ranjankuldeep/updateServicesList/internal/runner"
 )
