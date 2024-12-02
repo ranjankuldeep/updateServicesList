@@ -10,6 +10,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/ranjankuldeep/updateServicesList/internal/database"
 	"github.com/ranjankuldeep/updateServicesList/internal/runner"
+	"github.com/ranjankuldeep/updateServicesList/logs"
 )
 
 func main() {
@@ -22,6 +23,7 @@ func main() {
 	password := os.Getenv("MONGODB_PASSWORD")
 	databaseName := os.Getenv("MONGODB_DATABASE")
 	uri := fmt.Sprintf("mongodb+srv://%s:%s@cluster0.blfflhg.mongodb.net/%s?retryWrites=true&w=majority", username, password, databaseName)
+	logs.Logger.Info(uri)
 
 	client, err := database.ConnectDB(uri)
 	if err != nil {
