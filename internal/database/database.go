@@ -27,9 +27,7 @@ func ConnectDB(uri string) (*mongo.Client, error) {
 		return nil, err
 	}
 
-	// Get the database name
-	dbName := "Express-Backend"
-
+	dbName := "paidsms"
 	fmt.Printf("Connected to DB: %s\n", dbName)
 	return client, nil
 }
