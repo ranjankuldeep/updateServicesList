@@ -12,6 +12,7 @@ type ServerData struct {
 	Price  string `bson:"price" json:"price"`
 	Code   string `bson:"code" json:"code"`
 	Otp    string `bson:"otp" json:"otp"`
+	Block  bool   `bson:"block" json:"block" default:"false"`
 }
 
 type ServerList struct {

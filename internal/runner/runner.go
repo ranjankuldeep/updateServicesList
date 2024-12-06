@@ -22,6 +22,7 @@ type ServerDataUpload struct {
 	Price  string `bson:"price" json:"price"`
 	Code   string `bson:"code" json:"code"`
 	Otp    string `bson:"otp" json:"otp"`
+	Block  bool   `bson:"block" json:"block" default:"false"`
 }
 
 type ServerListUpload struct {
@@ -57,7 +58,7 @@ func FetchServerData(url string) ([]ServerListUpload, error) {
 }
 
 func UpdateServerData(db *mongo.Database, ctx context.Context) error {
-	url := "https://own5k.in/p/final.php"
+	url := "https://php.paidsms.in/final.php"
 	serverData, err := FetchServerData(url)
 	if err != nil {
 		logs.Logger.Error(err)
