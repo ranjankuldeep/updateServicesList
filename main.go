@@ -20,7 +20,7 @@ func main() {
 	username := os.Getenv("MONGODB_USERNAME")
 	password := os.Getenv("MONGODB_PASSWORD")
 	databaseName := os.Getenv("MONGODB_DATABASE")
-	uri := fmt.Sprintf("mongodb+srv://%s:%s@cluster0.blfflhg.mongodb.net/%s?retryWrites=true&w=majority", username, password, databaseName)
+	uri := fmt.Sprintf("mongodb+srv://%s:%s@cluster0.g7wa6.mongodb.net/%s?retryWrites=true&w=majority&appName=Cluster0", username, password, databaseName)
 
 	client, err := database.ConnectDB(uri)
 	if err != nil {
