@@ -70,14 +70,15 @@ func UpdateServerData(db *mongo.Database, ctx context.Context) error {
 		return err
 	}
 
-	for serviceIndex, service := range serverData {
-		for serverIndex, server := range service.Servers {
+	for serviceIndex := range serverData {
+		for serverIndex := range serverData[serviceIndex].Servers {
+			server := &serverData[serviceIndex].Servers[serverIndex]
 			priceFloat, err := strconv.ParseFloat(server.Price, 64)
 			if err != nil {
-				fmt.Printf("Invalid price for server %d: %v\n", server.Server, err)
+				logs.Logger.Errorf("Invalid price for server %d: %v", server.Server, err)
 				continue
 			}
-			serverData[serviceIndex].Servers[serverIndex].Price = fmt.Sprintf("%.2f", priceFloat*exchangeMap[server.Server]+marginMap[server.Server])
+			server.Price = fmt.Sprintf("%.2f", priceFloat*exchangeMap[server.Server]+marginMap[server.Server])
 		}
 	}
 

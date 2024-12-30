@@ -17,20 +17,19 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error loading .env file: %v", err)
 	}
-	username := os.Getenv("MONGODB_USERNAME")
-	password := os.Getenv("MONGODB_PASSWORD")
 	databaseName := os.Getenv("MONGODB_DATABASE")
-	uri := fmt.Sprintf("mongodb+srv://%s:%s@cluster0.g7wa6.mongodb.net/%s?retryWrites=true&w=majority&appName=Cluster0", username, password, databaseName)
-
-	client, err := database.ConnectDB(uri)
+	uri := os.Getenv("MONGODB_URI")
+	client, err := database.ConnectDB(databaseName, uri)
 	if err != nil {
 		log.Fatal("Error initializing MongoDB connection:", err)
 	}
 	db := client.Database(databaseName)
+
 	startTime := time.Now()
 	runner.UpdateServerData(db, context.TODO())
-
 	duration := time.Since(startTime).Seconds()
+
 	durationRoundOff := fmt.Sprintf("%.2f seconds", duration)
 	fmt.Println("Time taken to update server data:", durationRoundOff)
+	fmt.Println("Succesfully updated servicelist data")
 }
